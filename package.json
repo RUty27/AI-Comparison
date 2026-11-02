@@ -1,0 +1,44 @@
+{
+  "name": "duobot",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Ask Claude and Gemini side by side, using your local Claude Code and Gemini CLI logins.",
+  "scripts": {
+    "dev": "next dev",
+    "dev:mock": "cross-env DUOBOT_MOCK=1 next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "start:windows": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/windows/start-duobot.ps1",
+    "stop:windows": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/windows/stop-duobot.ps1",
+    "update:windows": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/windows/update-duobot.ps1",
+    "share:windows": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/windows/share-tailscale.ps1",
+    "autostart:install": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/windows/install-autostart.ps1",
+    "autostart:remove": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/windows/uninstall-autostart.ps1"
+  },
+  "dependencies": {
+    "nanoid": "^6.0.2",
+    "next": "^16.4.3",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-markdown": "^10.1.0",
+    "rehype-highlight": "^7.0.2",
+    "remark-gfm": "^4.0.1",
+    "zustand": "^5.0.16"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@tailwindcss/typography": "^0.5.20",
+    "@types/node": "^26.6.6",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "cross-env": "^10.1.0",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.4.3",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^6.0.3",
+    "vitest": "^5.0.5"
+  }
+}
