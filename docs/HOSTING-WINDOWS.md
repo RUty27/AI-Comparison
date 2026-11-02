@@ -18,9 +18,8 @@ Your PC has to be on and logged in for DuoBot to work.
 
    ```powershell
    cd $HOME
-   git clone https://github.com/ruty27/ai-comparison.git DuoBot
+   git clone --branch main https://github.com/ruty27/ai-comparison.git DuoBot
    cd DuoBot
-   git checkout claude/blissful-euler-05uga3
    ```
 
 ## 2. Sign in to Claude and Gemini (once)
