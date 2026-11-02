@@ -34,13 +34,15 @@ npm run dev
 
 Open http://localhost:3000.
 
-To try the interface without either CLI, use fake streaming replies (macOS/Linux):
+To try the interface without either CLI, use fake streaming replies:
 
 ```bash
 npm run dev:mock
 ```
 
-On Windows, put `DUOBOT_MOCK=1` in `.env.local` and run `npm run dev`.
+## Host it (use it from your phone)
+
+DuoBot needs your signed-in CLIs, so it runs on your own computer rather than on a web host. On Windows, one command makes it start at log on and shares it privately with your phone through Tailscale. See **[docs/HOSTING-WINDOWS.md](docs/HOSTING-WINDOWS.md)**.
 
 ## Settings
 
@@ -52,6 +54,7 @@ Copy `.env.example` to `.env.local`:
 | `CLAUDE_MODEL`, `GEMINI_MODEL` | Model override, e.g. `sonnet` or `gemini-2.5-pro` (empty = CLI default) |
 | `CLI_TIMEOUT_MS` | Stop a reply after this long (default 5 min) |
 | `DUOBOT_MOCK` | `1` = fake replies |
+| `DUOBOT_PASSWORD` | If set, the app asks for this password (any username) |
 
 ## How it works
 

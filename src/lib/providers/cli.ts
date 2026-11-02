@@ -19,6 +19,17 @@ function winQuote(arg: string): string {
 
 export class CliError extends Error {}
 
+/**
+ * Turns a failed exit into a readable message. On Windows the CLI runs
+ * through cmd.exe, so a missing binary shows up as "is not recognized"
+ * (or "command not found" in a POSIX shell) rather than ENOENT.
+ */
+export function exitMessage(stderr: string, code: number | null, cmd: string, installHint: string): string {
+  if (/is not recognized as an internal or external command|command not found/i.test(stderr)) return installHint;
+  const msg = stderr.trim().split("\n").slice(-6).join("\n");
+  return msg || `${cmd} exited with code ${code}`;
+}
+
 export interface SpawnOptions {
   cmd: string;
   args: string[];
@@ -75,10 +86,7 @@ export async function* spawnLines(opts: SpawnOptions): AsyncGenerator<string> {
       throw new CliError(err.code === "ENOENT" ? opts.installHint : err.message);
     }
     if (opts.signal?.aborted) return;
-    if (code !== 0) {
-      const msg = stderr.trim().split("\n").slice(-6).join("\n");
-      throw new CliError(msg || `${opts.cmd} exited with code ${code}`);
-    }
+    if (code !== 0) throw new CliError(exitMessage(stderr, code, opts.cmd, opts.installHint));
   } finally {
     clearTimeout(timer);
     opts.signal?.removeEventListener("abort", kill);
